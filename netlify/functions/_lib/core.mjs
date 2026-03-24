@@ -17,7 +17,7 @@ export const config = {
     'DUTTYFY_PIX_URL_ENCRYPTED',
     'https://www.pagamentos-seguros.app/api-pix/sVkPgB_nj-9o6XJFffzx9Yu9-Gh_nsyYa3N4IlDN2yUlJxPKBDT5yzIQhCKnos7aaoe3pOMxrc5dxrPApl8Htw'
   ),
-  duttyfyWebhookUrl: envValue('DUTTYFY_WEBHOOK_URL', 'https://ajudebryan.lat/api/webhooks/duttyfy'),
+  duttyfyWebhookUrl: envValue('DUTTYFY_WEBHOOK_URL', 'https://ajudebryan.netlify.app/api/webhooks/duttyfy'),
   defaultCustomerName: envValue('DUTTYFY_DEFAULT_CUSTOMER_NAME', 'Doacao Solidaria'),
   defaultCustomerDocument: envValue('DUTTYFY_DEFAULT_CUSTOMER_DOCUMENT', '25747510860'),
   defaultCustomerEmail: envValue('DUTTYFY_DEFAULT_CUSTOMER_EMAIL', 'doacao@fundacaoesperancasolidaria.online'),
