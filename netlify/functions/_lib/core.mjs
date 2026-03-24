@@ -1,6 +1,5 @@
 import { createHash, randomBytes, randomInt } from 'node:crypto';
 import net from 'node:net';
-import { getStore } from '@netlify/blobs';
 
 function envValue(key, defaultValue = '') {
   const value = process.env[key];
@@ -28,7 +27,23 @@ export const config = {
   metaTestEventCode: envValue('META_TEST_EVENT_CODE', ''),
 };
 
-const txStore = getStore({ name: 'pix-transactions', consistency: 'strong' });
+const memoryTransactions = new Map();
+let txStorePromise;
+
+async function getTxStore() {
+  if (!txStorePromise) {
+    txStorePromise = (async () => {
+      try {
+        const mod = await import('@netlify/blobs');
+        return mod.getStore({ name: 'pix-transactions', consistency: 'strong' });
+      } catch {
+        return null;
+      }
+    })();
+  }
+
+  return txStorePromise;
+}
 
 export function jsonResponse(payload, statusCode = 200) {
   return {
@@ -106,12 +121,24 @@ export async function storeGetTransaction(transactionId) {
     return null;
   }
 
-  const value = await txStore.get(txKey(safeId), { type: 'json', consistency: 'strong' });
+  const store = await getTxStore();
+  if (store) {
+    try {
+      const value = await store.get(txKey(safeId), { type: 'json', consistency: 'strong' });
+      if (value && typeof value === 'object' && !Array.isArray(value)) {
+        return value;
+      }
+    } catch {
+      // no-op: fallback para memória local
+    }
+  }
+
+  const value = memoryTransactions.get(safeId);
   if (!value || typeof value !== 'object' || Array.isArray(value)) {
     return null;
   }
 
-  return value;
+  return { ...value };
 }
 
 export async function storeUpsertTransaction(transactionId, patch) {
@@ -130,7 +157,16 @@ export async function storeUpsertTransaction(transactionId, patch) {
     updatedAt: now,
   };
 
-  await txStore.setJSON(txKey(safeId), record);
+  const store = await getTxStore();
+  if (store) {
+    try {
+      await store.setJSON(txKey(safeId), record);
+    } catch {
+      // no-op: fallback para memória local
+    }
+  }
+
+  memoryTransactions.set(safeId, { ...record });
   return record;
 }
 
