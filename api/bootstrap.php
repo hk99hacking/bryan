@@ -69,7 +69,7 @@ function config(string $key): string
             ),
             'duttyfy_webhook_url' => env_value(
                 'DUTTYFY_WEBHOOK_URL',
-                'https://ajudebryan.lat/api/webhooks/duttyfy'
+                'https://ajudebryan.netlify.app/api/webhooks/duttyfy'
             ),
             'default_customer_name' => env_value('DUTTYFY_DEFAULT_CUSTOMER_NAME', 'Doacao Solidaria'),
             'default_customer_document' => env_value('DUTTYFY_DEFAULT_CUSTOMER_DOCUMENT', '25747510860'),
