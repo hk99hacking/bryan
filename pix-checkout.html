@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout PIX</title>
+  <link rel="icon" type="image/svg+xml" href="images/pix-logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gantari:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <script>
+    (function(w,d,s,u,pixelId){
+      if(w.fbq){return;}
+      var n = w.fbq = function(){
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+      };
+      if(!w._fbq){w._fbq = n;}
+      n.push = n;
+      n.loaded = true;
+      n.version = '2.0';
+      n.queue = [];
+      var t = d.createElement(s);
+      t.async = true;
+      t.src = u;
+      var f = d.getElementsByTagName(s)[0];
+      f.parentNode.insertBefore(t, f);
+
+      w.__META_PIXEL_ID__ = pixelId;
+      w.metaGenEventId = function(prefix) {
+        var safePrefix = (prefix || 'evt').toString().toLowerCase().replace(/[^a-z0-9_]/g, '');
+        var rand = Math.random().toString(16).slice(2);
+        return safePrefix + '_' + Date.now().toString(16) + rand;
+      };
+      w.metaTrack = function(eventName, params, eventId) {
+        var resolvedId = eventId || w.metaGenEventId((eventName || 'evt').toString().toLowerCase());
+        var customParams = params && typeof params === 'object' ? params : {};
+        try {
+          w.fbq('track', eventName, customParams, { eventID: resolvedId });
+        } catch (e) {}
+        return resolvedId;
+      };
+    })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js', '1629319954874639');
+    fbq('init', '1629319954874639');
+  </script>
+  <script
+    src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+    data-utmify-prevent-xcod-sck
+    data-utmify-prevent-subids
+    async
+    defer
+  ></script>
+  <!-- TikTok Pixel Code Start -->
+  <script>
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+  var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+  n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+
+    ttq.load('D6UB5U3C77UEODBH6AQG');
+    ttq.page();
+  }(window, document, 'ttq');
+  </script>
+  <!-- TikTok Pixel Code End -->
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
+      font-family: Gantari, Arial, sans-serif;
+      background: #d6d6d8;
+    }
+
+    #stage {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 10px;
+    }
+
+    #cardScale {
+      width: min(585px, 100%);
+    }
+
+    .checkout-card {
+      width: 100%;
+      border-radius: 30px;
+      background: #efeff1;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      padding: 26px 16px 16px;
+      color: #1f2937;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-logo {
+      width: 154px;
+      height: 52px;
+      object-fit: contain;
+      display: block;
+      margin-left: 10px;
+    }
+
+    .hero-icon {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      display: block;
+      margin: 32px auto 0;
+    }
+
+    .title {
+      margin: 20px 0 0;
+      text-align: center;
+      font-size: 25px;
+      line-height: 1.14;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      color: #0f172a;
+    }
+
+    .subtitle {
+      margin: 12px 0 0;
+      text-align: center;
+      color: #697386;
+      font-size: 14px;
+      line-height: 1.2;
+      font-weight: 500;
+    }
+
+    .amount-line {
+      margin: 18px 0 0;
+      text-align: center;
+      font-size: 21px;
+      color: #4b5563;
+      line-height: 1.1;
+      font-weight: 500;
+    }
+
+    .amount-line strong {
+      color: #0f8a4d;
+      font-weight: 700;
+    }
+
+    .instruction {
+      margin: 24px auto 0;
+      text-align: center;
+      color: #4b4b4d;
+      font-size: 15px;
+      line-height: 1.3;
+      width: 93%;
+      font-weight: 500;
+    }
+
+    .qr-box {
+      width: min(228px, 100%);
+      aspect-ratio: 1 / 1;
+      height: auto;
+      margin: 18px auto 0;
+      border-radius: 16px;
+      background: #f6f6f7;
+      border: 2px solid #e5e7eb;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .qr-image {
+      width: min(196px, 86%);
+      aspect-ratio: 1 / 1;
+      height: auto;
+      display: none;
+      object-fit: contain;
+    }
+
+    .qr-fallback {
+      color: #6b7280;
+      font-size: 14px;
+      text-align: center;
+      line-height: 1.25;
+      max-width: 90%;
+    }
+
+    .or-divider {
+      margin: 20px 0 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #7b8496;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .or-divider::before,
+    .or-divider::after {
+      content: "";
+      flex: 1;
+      height: 2px;
+      background: #d9dbe1;
+      border-radius: 999px;
+    }
+
+    .pix-input {
+      width: 100%;
+      margin-top: 12px;
+      height: 46px;
+      border-radius: 16px;
+      border: 2px solid #d6d9e0;
+      background: #f6f6f7;
+      color: #242629;
+      font-size: 15px;
+      padding: 0 14px;
+      outline: none;
+      font-weight: 500;
+    }
+
+    .copy-btn {
+      width: 100%;
+      margin-top: 12px;
+      height: 68px;
+      border-radius: 18px;
+      border: 3px solid #06b457;
+      background: #06c75f;
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 800;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: filter 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .copy-btn:hover {
+      filter: brightness(0.96);
+    }
+
+    .copy-btn.copied {
+      border-color: #078846;
+      background: #09904a;
+    }
+
+    .status {
+      margin: 9px 0 0;
+      min-height: 20px;
+      text-align: center;
+      color: #6b7280;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .status.success {
+      color: #0f8a4d;
+      font-weight: 700;
+    }
+
+    .status.error {
+      color: #c62828;
+      font-weight: 700;
+    }
+
+    .how-box {
+      margin-top: 12px;
+      border-radius: 20px;
+      background: #e8e9ec;
+      padding: 14px 12px 12px;
+      min-height: 0;
+    }
+
+    .how-title {
+      margin: 0;
+      text-align: center;
+      color: #0f172a;
+      font-size: 18px;
+      line-height: 1.1;
+      font-weight: 800;
+    }
+
+    .how-list {
+      margin-top: 10px;
+      display: grid;
+      gap: 7px;
+    }
+
+    .how-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .how-icon {
+      width: 44px;
+      height: 44px;
+      flex: 0 0 44px;
+      border-radius: 999px;
+      background: #d7dae1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #596273;
+      font-size: 26px;
+      line-height: 1;
+      font-weight: 500;
+    }
+
+    .how-item p {
+      margin: 0;
+      color: #4b5563;
+      font-size: 12px;
+      line-height: 1.35;
+      font-weight: 500;
+    }
+
+    @media (max-width: 520px) {
+      #stage {
+        padding: 10px;
+      }
+
+      .checkout-card {
+        border-radius: 24px;
+        padding: 16px 9px 12px;
+      }
+
+      .brand-logo {
+        width: 132px;
+        height: 44px;
+      }
+
+      .hero-icon {
+        margin-top: 24px;
+      }
+
+      .title {
+        font-size: 22px;
+      }
+
+      .subtitle {
+        font-size: 13px;
+      }
+
+      .amount-line {
+        margin-top: 14px;
+        font-size: 19px;
+      }
+
+      .instruction {
+        margin-top: 18px;
+        width: 96%;
+        font-size: 14px;
+      }
+
+      .qr-box {
+        width: min(228px, 100%);
+      }
+
+      .or-divider {
+        margin-top: 18px;
+      }
+
+      .pix-input {
+        height: 46px;
+        font-size: 14px;
+      }
+
+      .copy-btn {
+        height: 62px;
+        font-size: 15px;
+      }
+
+      .status {
+        font-size: 14px;
+      }
+
+      .how-title {
+        font-size: 17px;
+      }
+
+      .how-item p {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1629319954874639&ev=PageView&noscript=1" alt=""></noscript>
+  <div id="stage">
+    <div id="cardScale">
+      <main class="checkout-card">
+        <img src="images/vakinha-logo.png" alt="Logo Vakinha" class="brand-logo">
+        <img src="images/hands.png" alt="Ícone Placeholder" class="hero-icon">
+
+        <h1 class="title">Você Está Salvando uma Vida</h1>
+        <p class="subtitle">Conclua sua doação abaixo.</p>
+        <p class="amount-line">Valor total: <strong id="pixAmountValue">R$ 0,00</strong></p>
+
+        <p class="instruction">Escaneie o QR Code ou copie o código Pix abaixo para finalizar o pagamento.</p>
+
+        <div class="qr-box">
+          <img id="pixQrImage" class="qr-image" alt="QR code" width="196" height="196">
+          <div id="pixQrFallback" class="qr-fallback">Gerando QR Code...</div>
+        </div>
+
+        <div class="or-divider"><span>ou</span></div>
+
+        <input id="pixCodeInput" class="pix-input" type="text" readonly spellcheck="false" value="" placeholder="Código PIX">
+
+        <button id="copyPixBtn" class="copy-btn" type="button">
+          <span id="copyPixBtnText">Copiar código pix</span>
+        </button>
+
+        <p id="pixStatusText" class="status">Aguardando pagamento...</p>
+
+        <section class="how-box">
+          <h2 class="how-title">Como pagar?</h2>
+          <div class="how-list">
+            <div class="how-item">
+              <div class="how-icon">+</div>
+              <p>Escaneie o QR Code ou copie e cole o código Pix em seu app bancário ou carteira digital.</p>
+            </div>
+            <div class="how-item">
+              <div class="how-icon">✓</div>
+              <p>Seu pagamento será aprovado em alguns instantes.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var transactionId = new URLSearchParams(window.location.search).get('transactionId') || '';
+      var copyBtn = document.getElementById('copyPixBtn');
+      var copyBtnText = document.getElementById('copyPixBtnText');
+      var pixCodeInput = document.getElementById('pixCodeInput');
+      var pixAmountValue = document.getElementById('pixAmountValue');
+      var pixQrImage = document.getElementById('pixQrImage');
+      var pixQrFallback = document.getElementById('pixQrFallback');
+      var pixStatusText = document.getElementById('pixStatusText');
+      var sessionKey = 'pix_checkout_payload';
+      var pollingTimer = null;
+      var purchaseStoragePrefix = 'meta_purchase_sent_';
+      var purchaseTracked = false;
+
+      function centsToMetaValue(cents) {
+        return Number((Number(cents || 0) / 100).toFixed(2));
+      }
+
+      function normalizeTransactionId(value) {
+        return String(value || '').replace(/[^a-zA-Z0-9_-]/g, '');
+      }
+
+      function sendMetaServerEvent(eventName, eventId, customData, txId) {
+        var payload = {
+          event_name: eventName,
+          event_id: eventId,
+          event_source_url: window.location.href,
+          custom_data: customData || {}
+        };
+
+        if (txId) {
+          payload.transaction_id = txId;
+        }
+
+        return fetch('api/meta-event', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).catch(function () {});
+      }
+
+      function canTrackTikTok() {
+        return typeof window.ttq !== 'undefined' && typeof window.ttq.track === 'function';
+      }
+
+      function buildTikTokContents(contentName) {
+        return [
+          {
+            content_id: 'doacao_bryan',
+            content_type: 'product',
+            content_name: contentName || 'Doação solidária'
+          }
+        ];
+      }
+
+      async function sha256Hex(value) {
+        if (!window.crypto || !window.crypto.subtle || typeof window.TextEncoder === 'undefined') {
+          return '';
+        }
+
+        var normalized = String(value || '').trim();
+        if (!normalized) {
+          return '';
+        }
+
+        var encoder = new TextEncoder();
+        var data = encoder.encode(normalized.toLowerCase());
+        var hashBuffer = await window.crypto.subtle.digest('SHA-256', data);
+        var hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+      }
+
+      async function identifyTikTokExternalId(externalId) {
+        if (!canTrackTikTok()) {
+          return;
+        }
+
+        var hashedExternalId = await sha256Hex(externalId);
+        if (!hashedExternalId) {
+          return;
+        }
+
+        try {
+          window.ttq.identify({
+            external_id: hashedExternalId
+          });
+        } catch (e) {
+        }
+      }
+
+      function trackTikTokViewContent() {
+        if (!canTrackTikTok()) {
+          return;
+        }
+
+        try {
+          window.ttq.track('ViewContent', {
+            contents: buildTikTokContents(document.title || 'Checkout PIX'),
+            value: 0,
+            currency: 'BRL'
+          });
+        } catch (e) {
+        }
+      }
+
+      function trackTikTokPurchase(txId, amountCents) {
+        if (!canTrackTikTok()) {
+          return;
+        }
+
+        identifyTikTokExternalId(txId)
+          .catch(function () {})
+          .finally(function () {
+            try {
+              window.ttq.track('Purchase', {
+                contents: buildTikTokContents('Doação solidária'),
+                value: centsToMetaValue(amountCents),
+                currency: 'BRL'
+              });
+            } catch (e) {
+            }
+          });
+      }
+
+      function trackPageMetaEvents() {
+        if (typeof window.metaTrack !== 'function') {
+          return;
+        }
+
+        var pageViewEventId = window.metaTrack('PageView', {});
+        sendMetaServerEvent('PageView', pageViewEventId, {});
+
+        var viewContentData = {
+          content_name: document.title || 'Checkout PIX',
+          content_category: 'pix_checkout'
+        };
+        var viewContentEventId = window.metaTrack('ViewContent', viewContentData);
+        sendMetaServerEvent('ViewContent', viewContentEventId, viewContentData);
+      }
+
+      function trackPurchaseIfCompleted(data) {
+        if (purchaseTracked) return;
+
+        var status = String((data && data.status) || '').toUpperCase();
+        if (status !== 'COMPLETED') return;
+
+        var txId = (data && data.transactionId) || transactionId || '';
+        if (!txId) return;
+
+        var storageKey = purchaseStoragePrefix + txId;
+        try {
+          if (sessionStorage.getItem(storageKey)) {
+            purchaseTracked = true;
+            return;
+          }
+        } catch (e) {}
+
+        var eventId = (data && data.metaPurchaseEventId) || ('purchase_' + normalizeTransactionId(txId));
+        var amountCents = Number((data && data.amount) || 0);
+        var customData = {
+          currency: 'BRL',
+          value: centsToMetaValue(amountCents),
+          content_name: 'Doação solidária',
+          order_id: txId
+        };
+
+        if (typeof window.metaTrack === 'function') {
+          window.metaTrack('Purchase', customData, eventId);
+        }
+        trackTikTokPurchase(txId, amountCents);
+        purchaseTracked = true;
+
+        try {
+          sessionStorage.setItem(storageKey, '1');
+        } catch (e) {}
+      }
+
+      trackPageMetaEvents();
+      trackTikTokViewContent();
+
+      function formatBRL(cents) {
+        return (Number(cents || 0) / 100).toLocaleString('pt-BR', {
+          style: 'currency',
+          currency: 'BRL'
+        });
+      }
+
+      function qrFromPixCode(pixCode) {
+        return 'https://api.qrserver.com/v1/create-qr-code/?data=' + encodeURIComponent(pixCode) + '&size=196x196&charset-source=UTF-8&charset-target=UTF-8&qzone=1&format=png&color=000000';
+      }
+
+      function setStatus(status) {
+        var normalized = String(status || '').toUpperCase();
+        pixStatusText.classList.remove('success');
+        pixStatusText.classList.remove('error');
+
+        if (normalized === 'COMPLETED') {
+          pixStatusText.textContent = 'Pagamento confirmado com sucesso.';
+          pixStatusText.classList.add('success');
+          return;
+        }
+
+        if (normalized === 'ERROR' || normalized === 'FAILED') {
+          pixStatusText.textContent = 'Não foi possível confirmar o pagamento.';
+          pixStatusText.classList.add('error');
+          return;
+        }
+
+        pixStatusText.textContent = 'Aguardando pagamento...';
+      }
+
+      function paint(data) {
+        if (!data || typeof data !== 'object') return;
+
+        if (typeof data.amount !== 'undefined' && data.amount !== null) {
+          pixAmountValue.textContent = formatBRL(data.amount);
+        }
+
+        if (data.pixCode) {
+          pixCodeInput.value = data.pixCode;
+          pixQrImage.src = qrFromPixCode(data.pixCode);
+          pixQrImage.style.display = 'block';
+          pixQrFallback.style.display = 'none';
+        }
+
+        if (data.status) {
+          setStatus(data.status);
+          trackPurchaseIfCompleted(data);
+        }
+      }
+
+      function loadSessionData() {
+        try {
+          var raw = sessionStorage.getItem(sessionKey);
+          if (!raw) return null;
+
+          var parsed = JSON.parse(raw);
+          if (!parsed || !parsed.transactionId) return null;
+          if (transactionId && parsed.transactionId !== transactionId) return null;
+          return parsed;
+        } catch (e) {
+          return null;
+        }
+      }
+
+      function stopPolling() {
+        if (pollingTimer) {
+          clearInterval(pollingTimer);
+          pollingTimer = null;
+        }
+      }
+
+      async function fetchStatus() {
+        if (!transactionId) return;
+
+        try {
+          var response = await fetch('api/check-pix?transactionId=' + encodeURIComponent(transactionId), {
+            method: 'GET',
+            cache: 'no-store'
+          });
+          var data = await response.json();
+          if (!response.ok || data.success === false) return;
+
+          paint(data);
+
+          var normalized = String(data.status || '').toUpperCase();
+          if (normalized === 'COMPLETED') {
+            stopPolling();
+          }
+        } catch (e) {
+        }
+      }
+
+      var payload = loadSessionData();
+      if (payload) {
+        if (!transactionId) {
+          transactionId = payload.transactionId || '';
+        }
+        paint(payload);
+      }
+
+      if (!transactionId) {
+        pixStatusText.textContent = 'Transação não encontrada.';
+        pixStatusText.classList.add('error');
+      } else {
+        fetchStatus();
+        pollingTimer = setInterval(fetchStatus, 5000);
+      }
+
+      copyBtn.addEventListener('click', async function () {
+        var value = pixCodeInput.value || '';
+        if (!value) return;
+
+        try {
+          await navigator.clipboard.writeText(value);
+        } catch (e) {
+          pixCodeInput.select();
+          document.execCommand('copy');
+        }
+
+        copyBtn.classList.add('copied');
+        copyBtnText.textContent = 'Copiado!';
+
+        setTimeout(function () {
+          copyBtn.classList.remove('copied');
+          copyBtnText.textContent = 'Copiar código pix';
+        }, 1800);
+      });
+
+    })();
+  </script>
+</body>
+</html>
